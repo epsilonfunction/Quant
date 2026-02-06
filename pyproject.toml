@@ -1,0 +1,18 @@
+[project]
+name = "Quant"
+version = "0.1.0"
+description = "A Series of Projects in Quantitative Research and Trading"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "arch>=8.0.0",
+    "ipykernel>=7.1.0",
+    "ipython>=9.10.0",
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "pandas>=3.0.0",
+    "scipy>=1.17.0",
+    "seaborn>=0.13.2",
+    "statsmodels>=0.14.6",
+    "yfinance>=1.1.0",
+]
