@@ -51,7 +51,7 @@ class GBM:
         S = self.S0 + np.cumsum(dS, axis=1)
         return S,timestep
     
-    def plot_paths(self, paths,timestep):
+    def plot_paths (self, paths,timestep):
         """ 
         Plots the generated paths
 
