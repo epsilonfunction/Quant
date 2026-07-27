@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "arch>=8.0.0",
+    "fastapi[standard]",
     "ipykernel>=7.1.0",
     "ipython>=9.10.0",
     "matplotlib>=3.10.8",
@@ -16,4 +17,9 @@ dependencies = [
     "statsmodels>=0.14.6",
     "websocket-client>=1.9.0",
     "yfinance>=1.1.0",
+]
+
+[tool.uv.workspace]
+members = [
+    "small-fastapi",
 ]
