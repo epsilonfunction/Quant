@@ -71,15 +71,21 @@ def backtest_vecm(data, coint_rank=1, k_ar_diff=2, deterministic='ci'):
     )
 
     vecm_fitted = vecm.fit()
-    print(vecm_fitted.__dict__)
+    # NOTE : TO REMOVE ONCE we fix the cointegration issue
+    # print(vecm_fitted.__dict__.keys())
+    # print(vecm_fitted.__dict__['det_coef'])
+    # print(vecm_fitted.__dict__['det_coef_coint'])
+    # print(vecm_fitted.__dict__['det_coef_coint'][:,1][0])
+    # print(vecm_fitted.__dict__['const'])
+    # print(vecm_fitted.__dict__['const_coint'])
     print('=== VECM summary ===')
     # print(vecm_fitted.summary())
 
     beta = vecm_fitted.beta[:, 0]
-    # print('beta (cointegration vector):', list(beta))
+    print('beta (cointegration vector):', list(beta))
 
     has_const = hasattr(vecm_fitted, 'det_coef_coint') and vecm_fitted.det_coef is not None
-    intercept = float(vecm_fitted.det_coef_coint[:,1]) if has_const else 0.0
+    intercept = float(vecm_fitted.__dict__['det_coef_coint'][:,1][0]) if has_const else 0.0
 
     data['spread'] = data.dot(beta) + intercept
     spread_mean = data['spread'].mean()
@@ -94,7 +100,10 @@ def backtest_vecm(data, coint_rank=1, k_ar_diff=2, deterministic='ci'):
 
     return vecm_fitted, data, spread_mean, spread_std
 
-# def backtest(data, strategy):
+
+def strategy(data):
+    if 
+def backtest(data, strategy):
     
 
 
