@@ -34,7 +34,7 @@ def load_benchmark(
     Returns Benchmark Data to compare strategy with
     Buy-and-Hold of SPY 
     """
-    return load_data(tickers=['SPY'], start_date,end_date,dropna)
+    return load_data(tickers=['SPY'], start_date=start_date,end_date=end_date,dropna=dropna)
 
 def backtest_vecm(data, coint_rank=1, k_ar_diff=2, deterministic='ci'):
     # Backtest for VECM
@@ -71,14 +71,15 @@ def backtest_vecm(data, coint_rank=1, k_ar_diff=2, deterministic='ci'):
     )
 
     vecm_fitted = vecm.fit()
+    print(vecm_fitted.__dict__)
     print('=== VECM summary ===')
-    print(vecm_fitted.summary())
+    # print(vecm_fitted.summary())
 
     beta = vecm_fitted.beta[:, 0]
-    print('beta (cointegration vector):', list(beta))
+    # print('beta (cointegration vector):', list(beta))
 
-    has_const = hasattr(fit, 'det_coef') and fit.det_coef is not None
-    intercept = float(fit.det_coef[0]) if has_const else 0.0
+    has_const = hasattr(vecm_fitted, 'det_coef_coint') and vecm_fitted.det_coef is not None
+    intercept = float(vecm_fitted.det_coef_coint[:,1]) if has_const else 0.0
 
     data['spread'] = data.dot(beta) + intercept
     spread_mean = data['spread'].mean()
